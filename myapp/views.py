@@ -12,7 +12,7 @@ import json
 
 #接下来要做的事情
 @require_http_methods(["GET"])
-def add_todo_item(request):
+def add_todo_items(request):
     response={}
     try:
         todo_item = request.GET.get("todo_item")
@@ -38,7 +38,7 @@ def add_todo_item(request):
     return JsonResponse(response)
 
 @require_http_methods(["GET"])
-def get_todo_item(request):
+def get_todo_items(request):
     response = {}
     try:
         items = TodoItem.objects.filter()
@@ -48,5 +48,18 @@ def get_todo_item(request):
     except:
         response['msg'] = 'error'
         response['error_num'] = 1
+
+    return JsonResponse(response)
+
+
+@require_http_methods(["POST"])
+def get_sum(request):
+    received_data = json.loads(request.body.decode('utf-8'))
+    var1=received_data['var1']
+    var2=received_data['var2']
+    print(var1,var2)
+    sum = int(var1)+int(var2)
+    response ={}
+    response['data'] =  sum
 
     return JsonResponse(response)
