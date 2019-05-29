@@ -65,7 +65,7 @@ def add_todo_items(request):
 def get_todo_items(request):
     response = {}
     try:
-        items = TodoItem.objects.filter()
+        items = TodoItem.objects.order_by('-todo_date')
 
         items_list=[]
         #print("step0")
@@ -101,7 +101,7 @@ def put_todo_item(request):
 
         #处理接收到到数据
         ##目前设置只能改变相应的事件是否能改变的状态
-        id = received_data['pk']
+        id = received_data['id']
         bFinish = received_data['bFinish']
 
         #修改数据
