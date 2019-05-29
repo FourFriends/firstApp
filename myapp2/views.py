@@ -88,9 +88,33 @@ def get_todo_items(request):
 
     return JsonResponse(response)
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["PUT"])
 def delete_todo_item(request):
-    pass
+    print("step0")
+    response = {}
+    try:
+        print("step1")
+        received_data = json.loads(request.body.decode('utf-8'))
+        print(received_data)
+
+        # 处理接收到到数据
+        ##目前设置只能改变相应的事件是否能改变的状态
+        id = received_data['id']
+        print(id)
+        # 修改数据
+        item = TodoItem.objects.get(id=id)
+        item.delete()
+
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except:
+        response['msg'] = 'fail'
+        response['error_num'] = 1
+    finally:
+        print("The end!")
+    return JsonResponse(response)
+
+
 
 @require_http_methods(["PUT"])
 def put_todo_item(request):
@@ -117,3 +141,4 @@ def put_todo_item(request):
     finally:
         print("The end!")
     return JsonResponse(response)
+
