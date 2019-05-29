@@ -7,13 +7,13 @@ from django.views.decorators.http import require_http_methods
 from django.core import serializers
 from .models import TodoItem
 from datetime import date
-import requests
 import json
 
 #接下来要做的事情
 @require_http_methods(["GET"])
-def add_todo_items(request):
+def add_todo_item(request):
     response={}
+
     try:
         todo_item = request.GET.get("todo_item")
         year = int(request.GET.get('year'))
