@@ -1,6 +1,6 @@
 certifi==2018.10.15
 chardet==3.0.4
-Django==2.2.1
+Django==2.2.21
 django-cors-headers==3.0.1
 idna==2.8
 mysqlclient==1.4.2.post1
